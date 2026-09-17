@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+@import 'tailwindcss';
+
+@theme inline {
+  --color-primary: #ff7a00;
+  --color-primary-hover: #e56d00;
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #6b6b6b;
+  --color-border: #ececec;
+}
+
+:root {
+  --primary: #ff7a00;
+  --primary-hover: #e56d00;
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --border: #ececec;
+  --navbar-bg: rgba(255, 255, 255, 0.75);
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Neon IA effect */
+.neon-ia {
+  color: #ff7a00;
+  text-shadow:
+    0 0 6px rgba(255, 122, 0, 0.9),
+    0 0 14px rgba(255, 122, 0, 0.75),
+    0 0 28px rgba(255, 122, 0, 0.55),
+    0 0 50px rgba(255, 122, 0, 0.35);
+  font-style: italic;
+}
+
+/* Logo font */
+.logo-text {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Infinite carousel */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.carousel-track {
+  display: flex;
+  animation: scroll-left 30s linear infinite;
+  width: max-content;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-left-slow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.carousel-track-slow {
+  display: flex;
+  animation: scroll-left-slow 20s linear infinite;
+  width: max-content;
+}
+
+/* Scrollbar hide */
+::-webkit-scrollbar { display: none; }
+* { scrollbar-width: none; }
+
+/* Section fade in */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  animation: fadeUp 0.7s ease forwards;
+}
