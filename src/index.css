@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 @import 'tailwindcss';
 
+/* Tailwind CSS v4 directive; unsupported by generic CSS linters. */
+/* stylelint-disable-next-line at-rule-no-unknown */
 @theme inline {
   --color-primary: #ff7a00;
   --color-primary-hover: #e56d00;
-  --color-bg: #fafafa;
+  --color-bg: #fff8f2;
   --color-surface: #ffffff;
   --color-text-primary: #1a1a1a;
   --color-text-secondary: #6b6b6b;
@@ -14,7 +16,7 @@
 :root {
   --primary: #ff7a00;
   --primary-hover: #e56d00;
-  --bg: #fafafa;
+  --bg: #fff8f2;
   --surface: #ffffff;
   --text-primary: #1a1a1a;
   --text-secondary: #6b6b6b;
@@ -38,11 +40,22 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Orange vignette overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, transparent 40%, rgba(255, 183, 120, 0.10) 70%, rgba(255, 150, 80, 0.16) 100%);
+}
+
 /* Neon IA effect */
 .neon-ia {
   color: #ff7a00;
   text-shadow:
-   0 0 4px #ffffff,
+    0 0 4px #ffffff,
     0 0 10px rgba(255, 255, 255, 0.9),
     0 0 14px #ffb066,
     0 0 28px #ff8c00,

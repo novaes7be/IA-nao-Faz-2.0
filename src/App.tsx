@@ -26,7 +26,7 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
-  const links = ['Sobre', 'Festas', 'Experiências', 'Equipe', 'FAQ', 'Contato']
+  const links = ['Sobre', 'Experiências', 'Festas', 'Equipe', 'FAQ', 'Contato']
 
   return (
     <nav
@@ -38,7 +38,7 @@ function Navbar() {
         borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
       }}
     >
-      <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-3 h-24 flex items-center justify-between">
         <a href="#hero">
           <Logo size="md" />
         </a>
@@ -106,7 +106,7 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-20 text-center"
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-70 pb-28 text-center"
     >
       {/* Flor decorativa atrás do título */}
       <img
@@ -115,13 +115,12 @@ function Hero() {
         aria-hidden="true"
         className="absolute pointer-events-none select-none"
         style={{
-          top: '8%',
+          top: '14%',
           left: '50%',
           transform: 'translateX(-50%)',
           width: '880px',
           maxWidth: '90vw',
-          opacity: 0.5,
-          filter: 'blur(1px)',
+          opacity: 1.0,
           zIndex: 0,
         }}
       />
