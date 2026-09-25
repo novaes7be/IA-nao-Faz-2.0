@@ -70,6 +70,222 @@ body::after {
   letter-spacing: -0.01em;
 }
 
+/* ─── Apple-style Hero Buttons ─── */
+
+.hero-btn {
+  position: relative;
+  isolation: isolate;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  min-width: 165px;
+  padding: 0.85rem 1.4rem;
+
+  border-radius: 999px;
+
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* conteúdo fica acima das camadas */
+.hero-btn span,
+.hero-btn-icon {
+  position: relative;
+  z-index: 2;
+}
+
+/* seta */
+.hero-btn-icon {
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── Criar Evento ─── */
+
+.hero-btn-primary {
+  color: #fff;
+  background: var(--primary);
+  border: 1px solid var(--primary);
+
+  box-shadow:
+    0 4px 14px rgba(255, 122, 0, 0.24),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* brilho interno */
+.hero-btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.22) 50%,
+      transparent 80%
+    );
+
+  transform: translateX(-120%);
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+  z-index: 1;
+}
+
+.hero-btn-primary:hover {
+  transform: translateY(-2px) scale(1.015);
+
+  background: var(--primary-hover);
+
+  box-shadow:
+    0 10px 30px rgba(255, 122, 0, 0.25),
+    0 4px 10px rgba(255, 122, 0, 0.14);
+}
+
+.hero-btn-primary:hover::before {
+  transform: translateX(120%);
+}
+
+.hero-btn-primary:hover .hero-btn-icon {
+  transform: translateX(3px);
+}
+
+
+/* ─── Explorar Festas ─── */
+
+.hero-btn-secondary {
+  color: var(--primary);
+
+  background: rgba(255, 255, 255, 0.55);
+
+  border: 1px solid rgba(255, 122, 0, 0.45);
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.03);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/*
+ * Camada laranja que nasce de baixo.
+ */
+.hero-btn-secondary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  background: var(--primary);
+
+  border-radius: inherit;
+
+  transform: scaleY(0);
+  transform-origin: bottom;
+
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+  z-index: 1;
+}
+
+.hero-btn-secondary:hover {
+  color: #fff;
+
+  border-color: var(--primary);
+
+  transform: translateY(-2px) scale(1.015);
+
+  box-shadow:
+    0 10px 30px rgba(255, 122, 0, 0.18),
+    0 4px 10px rgba(255, 122, 0, 0.08);
+}
+
+.hero-btn-secondary:hover::before {
+  transform: scaleY(1);
+}
+
+.hero-btn-secondary:hover .hero-btn-icon {
+  transform: translateX(3px);
+}
+
+
+/* ─── Click / press ─── */
+
+.hero-btn:active {
+  transform: translateY(0) scale(0.97);
+
+  transition-duration: 0.1s;
+}
+
+
+/* ─── Reduced motion ─── */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-btn,
+  .hero-btn::before,
+  .hero-btn-icon {
+    transition: none;
+  }
+
+  .hero-btn:hover {
+    transform: none;
+  }
+}
+
+.nav-link {
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  margin: 0 -0.8em;
+
+  color: inherit;
+  border-radius: 999px;
+
+  transition: color 0.25s ease;
+  z-index: 1;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: var(--primary);
+  border-radius: inherit;
+
+  transform: scaleY(0);
+  transform-origin: bottom;
+
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  z-index: -1;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.nav-link:hover::before {
+  transform: scaleY(1);
+}
+
 /* Infinite carousel */
 @keyframes scroll-left {
   0% { transform: translateX(0); }
@@ -109,4 +325,27 @@ body::after {
 
 .fade-up {
   animation: fadeUp 0.7s ease forwards;
+}
+/* ─── Footer ─── */
+
+.site-footer {
+  padding: 2.5rem 1.5rem;
+
+  background: var(--bg);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.footer-text {
+  margin: 0;
+
+  font-size: 0.875rem;
+  color: rgba(26, 26, 26, 0.55);
+
+  transition: color 0.3s ease;
+}
+
+.footer-text:hover {
+  color: rgba(26, 26, 26, 0.8);
 }
