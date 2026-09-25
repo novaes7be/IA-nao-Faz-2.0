@@ -271,22 +271,22 @@ const festas = [
   {
     name: 'Baile de Máscaras',
     desc: 'Mistério, elegância e uma noite inesquecível. Cada convidado chega como personagem e sai como protagonista de uma história.',
-    emoji: '🎭',
+    
   },
   {
     name: 'Halloween',
     desc: 'Do susto ao encanto: nossa produção transforma qualquer espaço em uma casa mal-assombrada que impressiona até os mais corajosos.',
-    emoji: '🎃',
+   
   },
   {
     name: 'Festa dos Mortos',
     desc: 'Inspirada no Día de los Muertos, celebramos a vida com cores, flores e uma cenografia que homenageia quem já partiu.',
-    emoji: '💀',
+    
   },
   {
     name: 'Oscar',
     desc: 'Tapete vermelho, glamour e uma cerimônia de premiação personalizada. Para quando a noite merece tratamento VIP.',
-    emoji: '🏆',
+    
   },
 ]
 
@@ -311,7 +311,7 @@ function Festas() {
                 boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
               }}
             >
-              <div className="text-4xl mb-4">{festa.emoji}</div>
+              <div className="text-4xl mb-4"></div>
               <h3 className="logo-text text-2xl text-[var(--text-primary)] mb-3 group-hover:text-[var(--primary)] transition-colors">
                 {festa.name}
               </h3>
@@ -409,7 +409,7 @@ const teamImages = [
 function EquipeCarousel() {
   const doubled = [...teamImages, ...teamImages]
   return (
-    <section className="py-24  overflow-hidden">
+    <section className="py-24 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 mb-10">
         <p className="text-xs font-bold tracking-widest uppercase text-[var(--primary)] mb-3">
           Equipe
@@ -425,11 +425,54 @@ function EquipeCarousel() {
           {doubled.map((img, i) => (
             <div
               key={i}
-              className="shrink-0 w-64 h-48 rounded-xl overflow-hidden"
+              className="shrink-0 w-96 h-72 rounded-xl overflow-hidden"
               style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
             >
               <img
-                src={`https://images.unsplash.com/photo-${img.id}?w=512&h=384&fit=crop&auto=format`}
+                src={`https://images.unsplash.com/photo-${img.id}?w=768&h=576&fit=crop&auto=format`}
+                alt={img.alt}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─── Making Off Carousel ─── */
+const makingOffImages = [
+  { id: '1492684223066-81342ee5ff30', alt: 'Bastidores da produção' },
+  { id: '1478147427282-58a87a120781', alt: 'Preparação do evento' },
+  { id: '1519225421980-715cb0215aed', alt: 'Equipe montando cenário' },
+  { id: '1511578314322-379afb476865', alt: 'Making off da festa' },
+]
+
+function MakingOffCarousel() {
+  const doubled = [...makingOffImages, ...makingOffImages]
+  return (
+    <section className="py-24 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6 mb-10">
+        <p className="text-xs font-bold tracking-widest uppercase text-[var(--primary)] mb-3">
+          Making Off
+        </p>
+        <p className="text-[var(--text-secondary)] text-lg max-w-xl">
+          Os bastidores de cada produção: o que acontece antes da festa começar.
+        </p>
+      </div>
+
+      <div className="overflow-hidden">
+        <div style={{ display: 'flex', animation: 'scroll-left-slow 20s linear infinite', width: 'max-content', gap: '1rem', paddingLeft: '1.5rem' }}>
+          {doubled.map((img, i) => (
+            <div
+              key={i}
+              className="shrink-0 w-96 h-72 rounded-xl overflow-hidden"
+              style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
+            >
+              <img
+                src={`https://images.unsplash.com/photo-${img.id}?w=768&h=576&fit=crop&auto=format`}
                 alt={img.alt}
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -601,6 +644,7 @@ export default function App() {
       <Festas />
       <Socias />
       <EquipeCarousel />
+      <MakingOffCarousel />
       <FAQ />
       <Contato />
       <Footer />
