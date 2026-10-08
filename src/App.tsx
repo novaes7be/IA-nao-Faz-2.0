@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import florSvg from './assets/flor.svg'
+import florSvg from './assets/flor.png'
 
 /* ─── Logo ─── */
 function Logo({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
@@ -34,7 +34,8 @@ function Navbar() {
     { label: 'Como funciona', href: '#processo' },
     { label: 'Serviços', href: '#servicos' },
     { label: 'Festas', href: '#festas' },
-    { label: 'Equipe', href: '#equipe' },
+    { label: 'Making Of', href: '#makingof' },
+    // { label: 'Equipe', href: '#equipe' }, // temporariamente oculto
     { label: 'FAQ', href: '#faq' },
     { label: 'Contato', href: '#contato' },
   ]
@@ -138,7 +139,7 @@ function Hero() {
           top: '14%',
           left: '50%',
           transform: 'translateX(-50%)',
-          width: '880px',
+          width: '600px',
           maxWidth: '90vw',
           opacity: 1,
           zIndex: 0,
@@ -481,28 +482,94 @@ function Servicos() {
 }
 
 /* ─── Portfolio Carousel ─── */
-const portfolioImages = [
-  {
-    id: '1540575467537-43a1b86cc9c2',
-    alt: 'Baile de máscaras elegante',
-  },
-  {
-    id: '1470229722913-7c0e2dbbafd3',
-    alt: 'Show ao vivo com luzes',
-  },
-  {
-    id: '1516450360452-9312f5e86fc7',
-    alt: 'Decoração de festa sofisticada',
-  },
-  {
-    id: '1519671282429-b8d64e4cb04e',
-    alt: 'Celebração noturna',
-  },
+const portfolioRow1 = [
+  { src: '/portfolio/festa-01.jpg', alt: 'Festa temática 1' },
+  { src: '/portfolio/festa-02.jpg', alt: 'Festa temática 2' },
+  { src: '/portfolio/festa-03.jpg', alt: 'Festa temática 3' },
+  { src: '/portfolio/festa-04.jpg', alt: 'Festa temática 4' },
+  { src: '/portfolio/festa-05.jpg', alt: 'Festa temática 5' },
+  { src: '/portfolio/festa-06.jpg', alt: 'Festa temática 6' },
+  { src: '/portfolio/festa-07.jpg', alt: 'Festa temática 7' },
+  { src: '/portfolio/festa-08.jpg', alt: 'Festa temática 8' },
+  { src: '/portfolio/festa-09.jpg', alt: 'Festa temática 9' },
+  { src: '/portfolio/festa-10.jpg', alt: 'Festa temática 10' },
+  { src: '/portfolio/festa-11.jpg', alt: 'Festa temática 11' },
+  { src: '/portfolio/festa-12.jpg', alt: 'Festa temática 12' },
+  { src: '/portfolio/festa-13.jpg', alt: 'Festa temática 13' },
+  { src: '/portfolio/festa-14.jpg', alt: 'Festa temática 14' },
+  { src: '/portfolio/festa-15.jpg', alt: 'Festa temática 15' },
 ]
 
-function PortfolioCarousel() {
-  const doubled = [...portfolioImages, ...portfolioImages]
+const portfolioRow2 = [
+  { src: '/portfolio/festa-16.jpg', alt: 'Festa temática 16' },
+  { src: '/portfolio/festa-17.jpg', alt: 'Festa temática 17' },
+  { src: '/portfolio/festa-18.jpg', alt: 'Festa temática 18' },
+  { src: '/portfolio/festa-19.jpg', alt: 'Festa temática 19' },
+  { src: '/portfolio/festa-20.jpg', alt: 'Festa temática 20' },
+  { src: '/portfolio/festa-21.jpg', alt: 'Festa temática 21' },
+  { src: '/portfolio/festa-22.jpg', alt: 'Festa temática 22' },
+  { src: '/portfolio/festa-23.jpg', alt: 'Festa temática 23' },
+  { src: '/portfolio/festa-24.jpg', alt: 'Festa temática 24' },
+]
 
+const portfolioRow3 = [
+  { src: '/portfolio/festa-25.jpg', alt: 'Festa temática 25' },
+  { src: '/portfolio/festa-26.jpg', alt: 'Festa temática 26' },
+  { src: '/portfolio/festa-27.jpg', alt: 'Festa temática 27' },
+  { src: '/portfolio/festa-28.jpg', alt: 'Festa temática 28' },
+  { src: '/portfolio/festa-29.jpg', alt: 'Festa temática 29' },
+  { src: '/portfolio/festa-30.jpg', alt: 'Festa temática 30' },
+  { src: '/portfolio/festa-31.jpg', alt: 'Festa temática 31' },
+  { src: '/portfolio/festa-32.jpg', alt: 'Festa temática 32' },
+  { src: '/portfolio/festa-33.jpg', alt: 'Festa temática 33' },
+  { src: '/portfolio/festa-34.jpg', alt: 'Festa temática 34' },
+  { src: '/portfolio/festa-35.jpg', alt: 'Festa temática 35' },
+]
+
+type PortfolioImage = { src: string; alt: string }
+
+function PortfolioRow({
+  images,
+  reverse = false,
+}: {
+  images: PortfolioImage[]
+  reverse?: boolean
+}) {
+  const doubled = [...images, ...images]
+
+  return (
+    <div className="overflow-hidden">
+      <div
+        style={{
+          display: 'flex',
+          animation: `${reverse ? 'scroll-right' : 'scroll-left'} ${images.length * 6}s linear infinite`,
+          width: 'max-content',
+          gap: '1rem',
+          paddingLeft: '1.5rem',
+        }}
+      >
+        {doubled.map((img, i) => (
+          <div
+            key={i}
+            className="shrink-0 w-96 h-72 rounded-xl overflow-hidden"
+            style={{
+              boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
+            }}
+          >
+            <img
+              src={img.src}
+              alt={img.alt}
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function PortfolioCarousel() {
   return (
     <section id="experiencias" className="py-24 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 mb-10">
@@ -520,33 +587,10 @@ function PortfolioCarousel() {
         </p>
       </div>
 
-      <div className="overflow-hidden">
-        <div
-          style={{
-            display: 'flex',
-            animation: 'scroll-left 45s linear infinite',
-            width: 'max-content',
-            gap: '1rem',
-            paddingLeft: '1.5rem',
-          }}
-        >
-          {doubled.map((img, i) => (
-            <div
-              key={i}
-              className="shrink-0 w-96 h-72 rounded-xl overflow-hidden"
-              style={{
-                boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-              }}
-            >
-              <img
-                src={`https://images.unsplash.com/photo-${img.id}?w=768&h=576&fit=crop&auto=format`}
-                alt={img.alt}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                loading={i < 3 ? 'eager' : 'lazy'}
-              />
-            </div>
-          ))}
-        </div>
+      <div className="flex flex-col gap-4">
+        <PortfolioRow images={portfolioRow1} />
+        <PortfolioRow images={portfolioRow2} reverse />
+        <PortfolioRow images={portfolioRow3} />
       </div>
     </section>
   )
@@ -785,34 +829,28 @@ function Socias() {
   )
 }
 
-/* ─── Team Carousel ─── */
-const teamImages = [
-  {
-    id: '1529156069898-49953e39b3ac',
-    alt: 'Equipe em ação',
-  },
-  {
-    id: '1511988617624-7cf0c7ded7cf',
-    alt: 'Produção do evento',
-  },
-  {
-    id: '1527529482837-4698179dc6ce',
-    alt: 'Bastidores do evento',
-  },
-  {
-    id: '1543269865-0a7c13dc5e58',
-    alt: 'Time comemorando',
-  },
+/* ─── Making Of Carousel ─── */
+const makingOfImages = [
+  { src: '/makingof/making-01.jpg', alt: 'Making of 1' },
+  { src: '/makingof/making-02.jpg', alt: 'Making of 2' },
+  { src: '/makingof/making-03.jpg', alt: 'Making of 3' },
+  { src: '/makingof/making-04.jpg', alt: 'Making of 4' },
+  { src: '/makingof/making-05.jpg', alt: 'Making of 5' },
+  { src: '/makingof/making-06.jpg', alt: 'Making of 6' },
+  { src: '/makingof/making-07.jpg', alt: 'Making of 7' },
+  { src: '/makingof/making-08.jpg', alt: 'Making of 8' },
+  { src: '/makingof/making-09.jpg', alt: 'Making of 9' },
+  { src: '/makingof/making-10.jpg', alt: 'Making of 10' },
 ]
 
-function EquipeCarousel() {
-  const doubled = [...teamImages, ...teamImages]
+function MakingOfCarousel() {
+  const doubled = [...makingOfImages, ...makingOfImages]
 
   return (
-    <section className="py-24 overflow-hidden">
+    <section id="makingoff" className="py-24 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 mb-10">
         <p className="text-xs font-bold tracking-widest uppercase text-[var(--primary)] mb-3">
-          Por trás da produção
+          Making Of
         </p>
 
         <h2 className="logo-text text-4xl md:text-5xl text-[var(--text-primary)] mb-4">
@@ -830,7 +868,7 @@ function EquipeCarousel() {
         <div
           style={{
             display: 'flex',
-            animation: 'scroll-left-slow 20s linear infinite',
+            animation: 'scroll-left-slow 60s linear infinite',
             width: 'max-content',
             gap: '1rem',
             paddingLeft: '1.5rem',
@@ -845,79 +883,7 @@ function EquipeCarousel() {
               }}
             >
               <img
-                src={`https://images.unsplash.com/photo-${img.id}?w=768&h=576&fit=crop&auto=format`}
-                alt={img.alt}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ─── Making Off Carousel ─── */
-const makingOffImages = [
-  {
-    id: '1492684223066-81342ee5ff30',
-    alt: 'Bastidores da produção',
-  },
-  {
-    id: '1478147427282-58a87a120781',
-    alt: 'Preparação do evento',
-  },
-  {
-    id: '1519225421980-715cb0215aed',
-    alt: 'Equipe montando cenário',
-  },
-  {
-    id: '1511578314322-379afb476865',
-    alt: 'Making off da festa',
-  },
-]
-
-function MakingOffCarousel() {
-  const doubled = [...makingOffImages, ...makingOffImages]
-
-  return (
-    <section className="py-24 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 mb-10">
-        <p className="text-xs font-bold tracking-widest uppercase text-[var(--primary)] mb-3">
-          Making Of
-        </p>
-
-        <h2 className="logo-text text-4xl md:text-5xl text-[var(--text-primary)] mb-4">
-          Antes da festa, existe todo um mundo.
-        </h2>
-
-        <p className="text-[var(--text-secondary)] text-lg max-w-xl">
-          Os bastidores de cada produção: montagem, preparação, ajustes e
-          aquela correria boa que acontece antes das portas abrirem.
-        </p>
-      </div>
-
-      <div className="overflow-hidden">
-        <div
-          style={{
-            display: 'flex',
-            animation: 'scroll-left-slow 20s linear infinite',
-            width: 'max-content',
-            gap: '1rem',
-            paddingLeft: '1.5rem',
-          }}
-        >
-          {doubled.map((img, i) => (
-            <div
-              key={i}
-              className="shrink-0 w-96 h-72 rounded-xl overflow-hidden"
-              style={{
-                boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-              }}
-            >
-              <img
-                src={`https://images.unsplash.com/photo-${img.id}?w=768&h=576&fit=crop&auto=format`}
+                src={img.src}
                 alt={img.alt}
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -1138,11 +1104,9 @@ export default function App() {
 
       <Festas />
 
-      <Socias />
+      {/* <Socias /> temporariamente oculto */}
 
-      <EquipeCarousel />
-
-      <MakingOffCarousel />
+      <MakingOfCarousel />
 
       <FAQ />
 
@@ -1150,7 +1114,7 @@ export default function App() {
 
       <Footer />
 
-      <WhatsAppButton />
+      {/* <WhatsAppButton /> */}
     </div>
   )
 }
