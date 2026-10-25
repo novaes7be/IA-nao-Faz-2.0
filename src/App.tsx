@@ -1,127 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import florSvg from './assets/flor.png'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import PortfolioDestaque from './components/PortfolioDestaque'
+import { VenetianMask, Ghost, Flower2, Clapperboard, type LucideIcon, Skull } from 'lucide-react'
 
-/* ─── Logo ─── */
-function Logo({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
-  const sizeMap = {
-    sm: 'text-base',
-    md: 'text-xl',
-    lg: 'text-3xl',
-  }
-
-  return (
-    <span className={`logo-text ${sizeMap[size]} text-[var(--text-primary)]`}>
-      O que a <span className="neon-ia">IA</span> não faz
-    </span>
-  )
-}
-
-/* ─── Navbar ─── */
-function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20)
-
-    window.addEventListener('scroll', handler)
-
-    return () => window.removeEventListener('scroll', handler)
-  }, [])
-
-  const links = [
-    { label: 'Sobre', href: '#sobre' },
-    { label: 'Como funciona', href: '#processo' },
-    { label: 'Serviços', href: '#servicos' },
-    { label: 'Festas', href: '#festas' },
-    { label: 'Making Of', href: '#makingof' },
-    // { label: 'Equipe', href: '#equipe' }, // temporariamente oculto
-    { label: 'FAQ', href: '#faq' },
-    { label: 'Contato', href: '#contato' },
-  ]
-
-  return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-      style={{
-        background: scrolled ? 'var(--navbar-bg)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
-        borderBottom: scrolled
-          ? '1px solid var(--border)'
-          : '1px solid transparent',
-      }}
-    >
-      <div className="max-w-6xl mx-auto px-3 h-24 flex items-center justify-between">
-        <a href="#hero">
-          <Logo size="md" />
-        </a>
-
-        {/* Desktop links */}
-        <div className="hidden lg:flex items-center gap-6">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="nav-link text-sm font-medium text-[var(--text-secondary)]"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-
-        {/* Mobile burger */}
-        <button
-          className="lg:hidden flex flex-col gap-1.5 p-2"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
-        >
-          <span
-            className={`block h-0.5 w-6 bg-[var(--text-primary)] transition-all duration-200 ${
-              menuOpen ? 'rotate-45 translate-y-2' : ''
-            }`}
-          />
-
-          <span
-            className={`block h-0.5 w-6 bg-[var(--text-primary)] transition-all duration-200 ${
-              menuOpen ? 'opacity-0' : ''
-            }`}
-          />
-
-          <span
-            className={`block h-0.5 w-6 bg-[var(--text-primary)] transition-all duration-200 ${
-              menuOpen ? '-rotate-45 -translate-y-2' : ''
-            }`}
-          />
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div
-          className="lg:hidden px-6 pb-6 pt-2 flex flex-col gap-4"
-          style={{
-            background: 'var(--navbar-bg)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            borderTop: '1px solid var(--border)',
-          }}
-        >
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className="nav-link text-base font-medium text-[var(--text-secondary)]"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      )}
-    </nav>
-  )
-}
 
 /* ─── Hero ─── */
 function Hero() {
@@ -147,7 +30,7 @@ function Hero() {
       />
 
       <div className="max-w-3xl mx-auto fade-up relative z-10">
-        <p className="text-sm font-semibold tracking-widest uppercase text-[var(--primary)] mb-6">
+        <p className="text-sm font-semibold tracking-widest uppercase text-[var(--primary)] mt-12 mb-6">
           Produção de Eventos
         </p>
 
@@ -481,121 +364,6 @@ function Servicos() {
   )
 }
 
-/* ─── Portfolio Carousel ─── */
-const portfolioRow1 = [
-  { src: '/portfolio/festa-01.jpg', alt: 'Festa temática 1' },
-  { src: '/portfolio/festa-02.jpg', alt: 'Festa temática 2' },
-  { src: '/portfolio/festa-03.jpg', alt: 'Festa temática 3' },
-  { src: '/portfolio/festa-04.jpg', alt: 'Festa temática 4' },
-  { src: '/portfolio/festa-05.jpg', alt: 'Festa temática 5' },
-  { src: '/portfolio/festa-06.jpg', alt: 'Festa temática 6' },
-  { src: '/portfolio/festa-07.jpg', alt: 'Festa temática 7' },
-  { src: '/portfolio/festa-08.jpg', alt: 'Festa temática 8' },
-  { src: '/portfolio/festa-09.jpg', alt: 'Festa temática 9' },
-  { src: '/portfolio/festa-10.jpg', alt: 'Festa temática 10' },
-  { src: '/portfolio/festa-11.jpg', alt: 'Festa temática 11' },
-  { src: '/portfolio/festa-12.jpg', alt: 'Festa temática 12' },
-  { src: '/portfolio/festa-13.jpg', alt: 'Festa temática 13' },
-  { src: '/portfolio/festa-14.jpg', alt: 'Festa temática 14' },
-  { src: '/portfolio/festa-15.jpg', alt: 'Festa temática 15' },
-]
-
-const portfolioRow2 = [
-  { src: '/portfolio/festa-16.jpg', alt: 'Festa temática 16' },
-  { src: '/portfolio/festa-17.jpg', alt: 'Festa temática 17' },
-  { src: '/portfolio/festa-18.jpg', alt: 'Festa temática 18' },
-  { src: '/portfolio/festa-19.jpg', alt: 'Festa temática 19' },
-  { src: '/portfolio/festa-20.jpg', alt: 'Festa temática 20' },
-  { src: '/portfolio/festa-21.jpg', alt: 'Festa temática 21' },
-  { src: '/portfolio/festa-22.jpg', alt: 'Festa temática 22' },
-  { src: '/portfolio/festa-23.jpg', alt: 'Festa temática 23' },
-  { src: '/portfolio/festa-24.jpg', alt: 'Festa temática 24' },
-]
-
-const portfolioRow3 = [
-  { src: '/portfolio/festa-25.jpg', alt: 'Festa temática 25' },
-  { src: '/portfolio/festa-26.jpg', alt: 'Festa temática 26' },
-  { src: '/portfolio/festa-27.jpg', alt: 'Festa temática 27' },
-  { src: '/portfolio/festa-28.jpg', alt: 'Festa temática 28' },
-  { src: '/portfolio/festa-29.jpg', alt: 'Festa temática 29' },
-  { src: '/portfolio/festa-30.jpg', alt: 'Festa temática 30' },
-  { src: '/portfolio/festa-31.jpg', alt: 'Festa temática 31' },
-  { src: '/portfolio/festa-32.jpg', alt: 'Festa temática 32' },
-  { src: '/portfolio/festa-33.jpg', alt: 'Festa temática 33' },
-  { src: '/portfolio/festa-34.jpg', alt: 'Festa temática 34' },
-  { src: '/portfolio/festa-35.jpg', alt: 'Festa temática 35' },
-]
-
-type PortfolioImage = { src: string; alt: string }
-
-function PortfolioRow({
-  images,
-  reverse = false,
-}: {
-  images: PortfolioImage[]
-  reverse?: boolean
-}) {
-  const doubled = [...images, ...images]
-
-  return (
-    <div className="overflow-hidden">
-      <div
-        style={{
-          display: 'flex',
-          animation: `${reverse ? 'scroll-right' : 'scroll-left'} ${images.length * 6}s linear infinite`,
-          width: 'max-content',
-          gap: '1rem',
-          paddingLeft: '1.5rem',
-        }}
-      >
-        {doubled.map((img, i) => (
-          <div
-            key={i}
-            className="shrink-0 w-96 h-72 rounded-xl overflow-hidden"
-            style={{
-              boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-            }}
-          >
-            <img
-              src={img.src}
-              alt={img.alt}
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              loading="lazy"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function PortfolioCarousel() {
-  return (
-    <section id="experiencias" className="py-24 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 mb-10">
-        <p className="text-xs font-bold tracking-widest uppercase text-[var(--primary)] mb-3">
-          Portfólio
-        </p>
-
-        <h2 className="logo-text text-4xl md:text-5xl text-[var(--text-primary)] mb-4">
-          Momentos que criamos
-        </h2>
-
-        <p className="text-[var(--text-secondary)] text-lg max-w-2xl">
-          Cada produção começa com uma ideia diferente. Aqui estão alguns dos
-          universos que já colocamos de pé.
-        </p>
-      </div>
-
-      <div className="flex flex-col gap-4">
-        <PortfolioRow images={portfolioRow1} />
-        <PortfolioRow images={portfolioRow2} reverse />
-        <PortfolioRow images={portfolioRow3} />
-      </div>
-    </section>
-  )
-}
-
 /* ─── Tipos de eventos ─── */
 function TiposEventos() {
   const events = [
@@ -677,21 +445,25 @@ function TiposEventos() {
 }
 
 /* ─── Festas ─── */
-const festas = [
+const festas: { name: string; desc: string; icon: LucideIcon }[] = [
   {
     name: 'Baile de Máscaras',
+    icon: VenetianMask,
     desc: 'Mistério, elegância e uma noite inesquecível. Cada convidado chega como personagem e sai como protagonista de uma história.',
   },
   {
     name: 'Halloween',
+    icon: Ghost,
     desc: 'Do susto ao encanto: uma produção que transforma o espaço e faz a festa entrar no clima desde o primeiro momento.',
   },
   {
     name: 'Festa dos Mortos',
+    icon: Skull,
     desc: 'Inspirada no Día de los Muertos, uma celebração cheia de cores, flores e elementos que transformam o ambiente.',
   },
   {
     name: 'Oscar',
+    icon: Clapperboard,
     desc: 'Tapete vermelho, glamour e uma cerimônia de premiação personalizada para transformar uma noite comum em uma grande estreia.',
   },
 ]
@@ -723,9 +495,12 @@ function Festas() {
                 boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
               }}
             >
-              <div className="text-4xl mb-4 text-[var(--primary)]">
-                ✦
-              </div>
+              <festa.icon
+                className="mb-4 text-[var(--primary)]"
+                size={36}
+                strokeWidth={1.5}
+                aria-hidden="true"
+              />
 
               <h3 className="logo-text text-2xl text-[var(--text-primary)] mb-3 group-hover:text-[var(--primary)] transition-colors">
                 {festa.name}
@@ -1017,7 +792,7 @@ function Contato() {
         </p>
 
         <a
-          href="mailto:contato@oqueanaoafaz.com.br"
+          href="mailto:deboranobrega@contatodireto.com"
           className="hero-btn hero-btn-primary"
         >
           <span>Vamos conversar</span>
@@ -1044,21 +819,6 @@ function Contato() {
   )
 }
 
-/* ─── Footer ─── */
-function Footer() {
-  return (
-    <footer className="site-footer">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <Logo size="sm" />
-
-        <p className="footer-text">
-          © {new Date().getFullYear()} O que a IA não faz. Todos os direitos
-          reservados.
-        </p>
-      </div>
-    </footer>
-  )
-}
 
 /* ─── WhatsApp Floating Button ─── */
 function WhatsAppButton() {
@@ -1098,7 +858,7 @@ export default function App() {
 
       <Servicos />
 
-      <PortfolioCarousel />
+      <PortfolioDestaque /> 
 
       <TiposEventos />
 
